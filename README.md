@@ -1,5 +1,8 @@
 # diabetes-prediction
 
+![diabetes](https://github.com/dspataru/diabetes-prediction/assets/61765352/5b2eb604-ef51-4f85-b050-136fedfd6756)
+
+
 ## Table of Contents
 * [Introduction](https://github.com/dspataru/diabetes-prediction/blob/main/README.md#introduction)
 * [Background](https://github.com/dspataru/diabetes-prediction/blob/main/README.md#background)
