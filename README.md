@@ -7,7 +7,8 @@
 * [Introduction](https://github.com/dspataru/diabetes-prediction/blob/main/README.md#introduction)
 * [Background](https://github.com/dspataru/diabetes-prediction/blob/main/README.md#background)
 * [Data Source](https://github.com/dspataru/diabetes-prediction/blob/main/README.md#data-source)
-* [Methodology](https://github.com/dspataru/diabetes-prediction/blob/main/README.md#methodology)
+* [Preparing the Data for the Models](https://github.com/dspataru/diabetes-prediction/blob/main/README.md#preparing-the-data-for-the-models)
+* [Model Description](https://github.com/dspataru/diabetes-prediction/blob/main/README.md#model-description)
 * [Analysis and Results](https://github.com/dspataru/diabetes-prediction/blob/main/README.md#analysis-and-results)
 * [Conclusion](https://github.com/dspataru/diabetes-prediction/blob/main/README.md#conclusion)
 * [Future Work](https://github.com/dspataru/diabetes-prediction/blob/main/README.md#future-work)
@@ -52,7 +53,7 @@ These tables were used to extract information directly related to diabetes. The 
 These were questions that the BRFSS asked over the phone related specifically to diabetes and pre-diabetes. In addition to the above questions, diabetes research has found the there are other important risk factors to be taken into consideration, including blood pressure, cholesterol, smoking, obesity, age, sex, race, diet, exercise, alcohol consumption, SMI, household income, sleep, frequency of doctor visits, medical care coverage, and mental and physical health. Unfortunately, the 2022 questionnaire does not include questions relation to blood pressure, cholesterol, or diet, however, there are many other questions that were used to provide data for the predictive models.
 
 
-## Methodology
+## Preparing the Data for the Models
 
 To predict if an individual has diabetes, a subset of the cleaned data was used and transformed into a new dataset to be fed into the models. The following were the columns of interest from the raw data:
 1. 'DISPCODE': This column contains two values 1100 for completed interviews, and 1200 for incomplete interviews. For the purposes of this project, we only want to include data from complete interviews. In the data cleaning process, we drop the rows where DISPCODE == 1200 which reduces the data from 445,132 entries, to 353,271 entries.
@@ -71,6 +72,26 @@ To predict if an individual has diabetes, a subset of the cleaned data was used 
 14.  'MEDCOST1': Question asked: Was there a time in the past 12 months when you needed to see a doctor but could not because you could not afford it? 1=Yes, 2=No, 7=don't know/not sure, 9=refused.
 15.  'GENHLTH', 'MENTHLTH', 'PHYSHLTH', 'DIFFWALK': These questions are related to general health, mental health, physical health, and walking frequency.
 16.  'SEXVAR', '_AGEG5YR', '_EDUCAG', 'INCOME3': The questions asked for these columns are related to demographics.
+
+The information in the dataframe was examined using the ```.info()``` method to review the non-null count in each column. The output is seen below:
+
+![raw_data.info()](https://github.com/dspataru/diabetes-prediction/assets/61765352/8950547f-88af-4780-bcdc-8a4dade08998)
+
+The CHKHEMO3, EYEEXAM1, DIABEYE1, and PDIABTS1 columns are missing many values. As a result, we drop these columns for the first attempt at creating a dataset to input to the ML models. Following this, the ```.dropna()``` method is used to drop all of the row entries with NaN values. The resulting dataset contains 17 columns (features) and 326,519 rows. The next step is to modify and clean the values to be more suitable to the ML algorithms. In order to be able to do this part, each column in the dataset was reviewed against the codebook which says what each column is, and what the values in each column correspond to. A breakdown of what was down can be found in the [data_model_cleaning.ipynb]() jupyter notebook in section 2.2. Finally, the columns were renamed to be more understandable. The resulting dataframe contained 252,888 rows, as some rows were dropped in the cleaning process, with 17 features, and the following classes for the diabetes column (target column):
+* No diabetes (0): 211,801 observations.
+* Pre-diabetes or borderline diabetes (1): 5893 observations.
+* Yes diabetes (2): 35,194 observations.
+
+This dataset was uploaded to an postgres database hosted by AWS RDS to be easily accessable by the whole team.
+
+## Feature Selection
+
+Feature selection is a crucial step in the process of building machine learning models as it plays a pivotal role in enhancing model performance and interpretability. The significance of feature selection lies in its ability to improve the model's efficiency by focusing on the most relevant and informative features while discarding irrelevant or redundant ones. By reducing the dimensionality of the dataset, feature selection helps mitigate the curse of dimensionality, which can adversely affect model training time and generalization to unseen data. For this project, we view the correlation matrix to check the correlation between features.
+
+
+
+## Model Description
+
 
 ## Analysis and Results
 
