@@ -90,13 +90,13 @@ Columns `SEXVAR`, `_BMI5CAT`, `_RACE1`, `_EDUCAG`, `_SMOKER3` contains numerical
     - Value of '_SMOKER3' - 1: "Smok_daily_Y", 2: "Smok_daily_N", 3: "Prev_Smoker", 4: "Never", 9:  np.nan
 
 - **3: Data cleaning of Numerical Columns**
-         ####for column "HEIGHT3"
+         - For column "HEIGHT3" <br>
           - 200 - 711: Height (ft/inches)<br>
-          --Notes: 0 _ / _ _ = feet / inches-- i.e. the first digit is feet, the second and third digits are inches. So 509 is 5' 9''
+          --Notes: 0 _ / _ _ = feet / inches-- i.e. the first digit is feet, the second and third digits are inches. So 509 is 5' 9''<br>
           - 9061 - 9998	Height (meters/centimeters)<br>
-          Notes: The initial ´9 ´ indicates this was a metric value. Height in m/cm (9_|_ _)
-          - 7777:	Don’t know/Not sure	
-          - 9999: Refused
+          Notes: The initial ´9 ´ indicates this was a metric value. Height in m/cm (9_|_ _)<br>
+          - 7777:	Don’t know/Not sure<br>	
+          - 9999: Refused<br>
 
 
 
