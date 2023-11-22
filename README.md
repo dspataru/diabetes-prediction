@@ -32,6 +32,7 @@ psycopg2, sqlalchemy, pandas, numpy, sklearn, tensorflow, matplotlib, seaborn
 
 ## Data Source
 <br>
+
 |Category|Renamed-as|Label/Question|Value|Null/Refused 
 |-|-|-|-|-|
 |<b>_STATE</b>|STATE|<i>-State FIPS Code</i>|-Integer [1-78]|--|
