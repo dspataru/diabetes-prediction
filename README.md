@@ -31,8 +31,50 @@ psycopg2, sqlalchemy, pandas, numpy, sklearn, tensorflow, matplotlib, seaborn
 ## Background
 
 ## Data Source
+<br>
+|Category|Renamed-as|Label/Question|Value|Null/Refused 
+|-|-|-|-|-|
+|<b>_STATE</b>|STATE|<i>-State FIPS Code</i>|-Integer [1-78]|--|
+|<b>DISPCODE</b>|DISPCODE|<i>- Final Disposition</i>|1100 : Completed Interview<br>1200 : Partial Complete Interview|--|
+|<b>SEXVAR</b>|GENDER|<i>-Sex of Respondent</i>|1: MALE<br>2: FEMALE|--|
+|<b>_INCOMG1</b>|INCOME|<i>-Income categories</i> (Computed income categories)|Integer [1-7]|9: Don't Know/refused|
+|<b>HEIGHT3</b>|HEIGHT|<i>-About how tall are you without shoes?</i> (Height in Feet and Inches)|200 - 711 : ft/inches<br>9061 - 9998 : m/cm |7777 & 9999 : Don't Know/refused <br>BLANK|
+|<b>WTKG3</b>|WEIGHT|<i>-Computed Weight in Kilograms</i> (Reported in kilograms)</i>|FLOAT [2300 - 29500]|BLANK|
+|<b>_BMI5CAT</b>|BMI|<i>-Computed body mass index categories</i> (Four-categories of BMI)</i>|1: Underweight<br>2 : Normal Weight<br>3: Over Weight<br>4: Obese|BLANK|
+|<b>_RACE1</b>|RACE|<i>-Computed Race-Ethnicity grouping</i> (Race/ethnicity categories)</i>|1: White<br>2: Black<br>3: Indian/ Alaskan Native <br>4: Asian<br>5:  Hawaiian/Pacific Islander<br>7: Multiracial<br>8: Hispanic<br>|9: Don't Know/refused<br>BLANK|
+|<b>_AGEG5YR</b>|AGE|<i>Reported age in five-year age categories calculated variable</i>(Fourteen-level age category)|-Integer [1-13]|14: Don't Know/refused
+|<b>DIABETE4</b>|DIABETES|<i>(Ever told) (you had) diabetes? </i> (If ´Yes´ and respondent is female, ask 'Was this only when you were pregnant?'|1: Yes<br>2: Yes: Only during Pregnancy<br>3: No <br>4: No, Pre-diabeteic/ Border-line|7 or  9: Don't Know/refused<br>BLANK|
+|<b>PHYSHLTH</b>|PHYSHLTH|<i>Now thinking about your physical health, which includes physical illness and injury, for how many days during the past 30 days was your physical health not good?</i> |Num of days [1-30]<br>88 : None|77 or  99: Don't Know/refused<br>BLANK|
+|<b>MENTHLTH</b>|MENTHLTH|<i> Now thinking about your mental health, which includes stress, depression, and problems with emotions, for how many days during the past 30 days was your mental health not good?</i>|Num of days [1-30]<br>88 : None|77 or  99: Don't Know/refused<br>BLANK|
+|<b>_TOTINDA</b>|EXERCISE|<i>Leisure Time Physical Activity Calculated Variable</i>|1: Yes<br>2: No| 9: Don't Know/refused|
+|<b>SLEPTIM1</b>|SLEEP|<i>How Much Time Do You Sleep</i> On average, how many hours of sleep do you get in a 24-hour period?|Num of hours [1-24]|77 or  99: Don't Know/refused<br>BLANK|
+|<b>PRIMINSR</b>|HLT_INSURANCE|<i> What is the current primary source of your health insurance?</i>|Different Plans [1-10]<br>88: No Coverage |99: Refused <br>BLANK|
+|<b>PERSDOC3</b>|PERSONAL_DOC|<i> Do you have Personal Health Care Provider?</i>|1: Yes - Only One<br>2: Yes -  More than One <br>3: No |7 or  9: Don't Know/refused<br>BLANK|
+|<b>CHECKUP1</b>|CHECKUP1|<i> Length of time since last routine checkup</i>|1: Within past year<br>2: Within past 2 years <br>3: Within past 5 years<br> 4: 5 or more years ago  |7 or  9: Don't Know/refused<br>BLANK|
+|<b>CVDINFR4</b>|HRT_ATTACK|<i>Ever Diagnosed with Heart Attack?</i>|1: Yes<br>2: No|7 or  9: Don't Know/refused<br>BLANK|
+|<b>CVDCRHD4</b>|HRT_DISEASE|<i>Ever Diagnosed with Angina or Coronary Heart Disease</i>|1: Yes<br>2: No|7 or  9: Don't Know/refused<br>BLANK|
+|<b>CVDSTRK3</b>|STROKE|<i>Ever Diagnosed with a Stroke</i>|1: Yes<br>2: No|7 or  9: Don't Know/refused<br>BLANK|
+|<b>HAVARTH4</b>|ARTHRITIS|<i> (Ever told) (you had) some form of arthritis, rheumatoid arthritis, gout, lupus, or fibromyalgia? </i>|1: Yes<br>2: No|7 or  9: Don't Know/refused<br>BLANK|
+|<b>DIFFWALK</b>|DIFFWALK|<i> Do you have serious difficulty walking or climbing stairs?</i>|1: Yes<br>2: No|7 or  9: Don't Know/refused<br>BLANK|
+|<b>_SMOKER3</b>|_SMOKER3|<i>Computed Smoking Status</i> (Four-level smoker status:  Everyday smoker, Someday smoker, Former smoker, Non-smoker) |1 : Smokes every day<br>2 : Smokes some days<br>3 : Former Smoker<br>4: Never|9: Don't Know/refused|
+|<b>_EDUCAG</b>|EDUCATION|<i>Computed level of education completed categories</i> |1 : Did not Graduate High School<br>2 : Graduated High School<br>3 : Attended College<br>4: Graduated from College |9: Don't Know/refused|
+|<b>CVDSTRK3</b>|STROKE|<i>Ever Diagnosed with a Stroke</i>|1: Yes<br>2: No|7 or  9: Don't Know/refused<br>BLANK|
+|||<b>COLUMNS SPECIFIFC TO DIABETIC PATIENTS</b>|||
+|<b>DIABTYPE</b>|DIABTYPE|<i> According to your doctor or other health professional, what type of diabetes do you have?</i>|1: Type 1<br>2: Type 2 |7 or  9: Don't Know/refused<br>BLANK|
+|<b>PREDIAB2</b>|PREDIABETIC|<i> Ever been told by a doctor or other health professional that you have pre-diabetes or borderline diabetes?</i>|1: Yes<br>2: Yes: Only during Pregnancy<br>3: No |7 or  9: Don't Know/refused<br>BLANK|
+|<b>PDIABTS1</b>|BLD_SUG_TST|<i> When was your last blood test for high blood sugar?</i>|Integer [1-6] : Past Years<br> 8: Never|7 or  9: Don't Know/refused<br>BLANK|
+|<b>INSULIN1</b>|INSULIN_Y/N|<i>Are you now taking insulin?</i>|1: Yes<br>2: No|7 or  9: Don't Know/refused<br>BLANK|
+|<b>CHKHEMO3</b>|A-one-C_test|<i>About how many times in the past 12 months has a doctor, nurse, or other health professional checked you for A-one-C?</i>|Number of times [1-76]<br>88: Never<br>98: Never heard of|77 or  99: Don't Know/refused<br>BLANK|
+|<b>EYEEXAM1</b>|EYEEXAM1|<i>When was the last time you had an eye exam in which the pupils were dilated, making you temporarily sensitive to bright light?</i>|Integer [1-4] : Different Time Range<br>8: Never|7 or  9: Don't Know/refused<br>BLANK|
+|<b>DIABEYE1</b>|DIABEYE1|<i>When was the last time a they took a photo of the back of your eye?</i>|Integer [1-4] : Different Time Range<br>8: Never|7 or  9: Don't Know/refused<br>BLANK|
+|<b>DIABEDU1</b>|DIAB_MNGMT|<i>When was the last time you took a course or class in how to manage your diabetes yourself?</i>|Integer [1-6] : Past Years<br>8: Never|7 or  9: Don't Know/refused<br>BLANK|
+|<b>FEETSORE</b>|FEETSORE|<i>Have you ever had any sores or irritations on your feet that took more than four weeks to heal?</i>|1: Yes<br>2: No|7 or  9: Don't Know/refused<br>BLANK|
+
 
 ## Methodology
+
+### Data Cleaning
+
 
 ## Analysis and Results
 
