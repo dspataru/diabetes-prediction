@@ -77,11 +77,26 @@ Following columns were selected for the analysis. The values in the columns were
 ## Methodology
 
 
-### Data Cleaning
+### Data Cleaning and Feature Engineering:
 - **1: Removing all the partially complete inteviews.**
 The column `DISPCODE` contains two values  :  1200 - For complete interview & 1100 for partially complete interviews. Selected only the rows that contain value `1200`. This reduced the dimension of the data by deleteing 91,861 values.
 
 - **2: Editing the values of categorical columns.**
+Columns `SEXVAR`, `_BMI5CAT`, `_RACE1`, `_EDUCAG`, `_SMOKER3` contains numerical values, and each value represents a category. These values were changed to categorical values that they represent
+    - Value of 'SEXVAR'- 1: MALE, 2: FEMALE
+    - Value of '_BMI5CAT'- 1: Underweight, 2 : Normal_Weight, 3: Over_Weight, 4: Obese
+    - Value of '_RACE1'- 1: "White", 2: "Black", 3: "Indian-Alaskan_Native", 4: "Asian", 5: "Hawaiian", 7: "Multiracial", 8: "Hispanic", 9:  np.nan
+    - Value of '_EDUCAG'- 1: "Grad_HS_N", 2: "Grad_HS_Y", 3: "College_N", 4: "College_Y", 9:  np.nan
+    - Value of '_SMOKER3' - 1: "Smok_daily_Y", 2: "Smok_daily_N", 3: "Prev_Smoker", 4: "Never", 9:  np.nan
+
+- **3: Data cleaning of Numerical Columns**
+         ####for column "HEIGHT3"
+          - 200 - 711: Height (ft/inches)<br>
+          --Notes: 0 _ / _ _ = feet / inches-- i.e. the first digit is feet, the second and third digits are inches. So 509 is 5' 9''
+          - 9061 - 9998	Height (meters/centimeters)<br>
+          Notes: The initial ´9 ´ indicates this was a metric value. Height in m/cm (9_|_ _)
+          - 7777:	Don’t know/Not sure	
+          - 9999: Refused
 
 
 
