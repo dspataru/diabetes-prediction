@@ -78,10 +78,10 @@ Following columns were selected for the analysis. The values in the columns were
 
 
 ### Data Cleaning and Feature Engineering:
-- **1: Removing all the partially complete inteviews.**
+**1: Removing all the partially complete inteviews.**
 The column `DISPCODE` contains two values  :  1200 - For complete interview & 1100 for partially complete interviews. Selected only the rows that contain value `1200`. This reduced the dimension of the data by deleteing 91,861 values.
 
-- **2: Editing the values of categorical columns.**
+**2: Editing the values of categorical columns.**
 Columns `SEXVAR`, `_BMI5CAT`, `_RACE1`, `_EDUCAG`, `_SMOKER3` contains numerical values, and each value represents a category. These values were changed to categorical values that they represent
     - Value of 'SEXVAR'- 1: MALE, 2: FEMALE
     - Value of '_BMI5CAT'- 1: Underweight, 2 : Normal_Weight, 3: Over_Weight, 4: Obese
@@ -89,7 +89,7 @@ Columns `SEXVAR`, `_BMI5CAT`, `_RACE1`, `_EDUCAG`, `_SMOKER3` contains numerical
     - Value of '_EDUCAG'- 1: "Grad_HS_N", 2: "Grad_HS_Y", 3: "College_N", 4: "College_Y", 9:  np.nan
     - Value of '_SMOKER3' - 1: "Smok_daily_Y", 2: "Smok_daily_N", 3: "Prev_Smoker", 4: "Never", 9:  np.nan
 
-- **3: Data cleaning of Numerical Columns**<br>
+**3: Data cleaning of Numerical Columns**<br>
   - **Calculating the values of HEIGHT Column**
       - For column "HEIGHT3" <br>
              - 200 - 711: Height (ft/inches)<br>
