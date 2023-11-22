@@ -31,6 +31,8 @@ psycopg2, sqlalchemy, pandas, numpy, sklearn, tensorflow, matplotlib, seaborn
 ## Background
 
 ## Data Source
+
+Following columns were selected for the analysis. The values in the columns were analyzed and data cleaning was performed.
 <br>
 
 |Category|Renamed-as|Label/Question|Value|Null/Refused| 
@@ -48,8 +50,8 @@ psycopg2, sqlalchemy, pandas, numpy, sklearn, tensorflow, matplotlib, seaborn
 |<b>PHYSHLTH</b>|PHYSHLTH|<i>Now thinking about your physical health, which includes physical illness and injury, for how many days during the past 30 days was your physical health not good?</i> |Num of days [1-30]<br>88 : None|77 or  99: Don't Know/refused<br>BLANK|
 |<b>MENTHLTH</b>|MENTHLTH|<i> Now thinking about your mental health, which includes stress, depression, and problems with emotions, for how many days during the past 30 days was your mental health not good?</i>|Num of days [1-30]<br>88 : None|77 or  99: Don't Know/refused<br>BLANK|
 |<b>_TOTINDA</b>|EXERCISE|<i>Leisure Time Physical Activity Calculated Variable</i>|1: Yes<br>2: No| 9: Don't Know/refused|
-|<b>SLEPTIM1</b>|SLEEP|<i>How Much Time Do You Sleep</i> On average, how many hours of sleep do you get in a 24-hour period?|Num of hours [1-24]|77 or  99: Don't Know/refused<br>BLANK|
-|<b>PRIMINSR</b>|HLT_INSURANCE|<i> What is the current primary source of your health insurance?</i>|Different Plans [1-10]<br>88: No Coverage |99: Refused <br>BLANK|
+|<b>SLEPTIM1</b>|SLEEP|<i>How Much Tim You Sleep</i> On average, how many hours of sleep do you get in a 24-hour period?|Num of hours [1-24]|77 or  99: Don't Know/refused<br>BLANK|
+|<b>PRIMINSR</b>|HLT_INSURANCE|<i> What is the Doe current primary source of your health insurance?</i>|Different Plans [1-10]<br>88: No Coverage |99: Refused <br>BLANK|
 |<b>PERSDOC3</b>|PERSONAL_DOC|<i> Do you have Personal Health Care Provider?</i>|1: Yes - Only One<br>2: Yes -  More than One <br>3: No |7 or  9: Don't Know/refused<br>BLANK|
 |<b>CHECKUP1</b>|CHECKUP1|<i> Length of time since last routine checkup</i>|1: Within past year<br>2: Within past 2 years <br>3: Within past 5 years<br> 4: 5 or more years ago  |7 or  9: Don't Know/refused<br>BLANK|
 |<b>CVDINFR4</b>|HRT_ATTACK|<i>Ever Diagnosed with Heart Attack?</i>|1: Yes<br>2: No|7 or  9: Don't Know/refused<br>BLANK|
@@ -74,7 +76,13 @@ psycopg2, sqlalchemy, pandas, numpy, sklearn, tensorflow, matplotlib, seaborn
 
 ## Methodology
 
+
 ### Data Cleaning
+- **1: Removing all the partially complete inteviews.**
+The column `DISPCODE` contains two values  :  1200 - For complete interview & 1100 for partially complete interviews. Selected only the rows that contain value `1200`. This reduced the dimension of the data by deleteing 91,861 values.
+
+- **2: Editing the values of categorical columns.**
+
 
 
 ## Analysis and Results
