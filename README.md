@@ -91,20 +91,20 @@ Columns `SEXVAR`, `_BMI5CAT`, `_RACE1`, `_EDUCAG`, `_SMOKER3` contains numerical
 
 - **3: Data cleaning of Numerical Columns**<br>
   - **Calculating the values of HEIGHT Column**
-  -     For column "HEIGHT3" <br>
+      - For column "HEIGHT3" <br>
              - 200 - 711: Height (ft/inches)<br>
               --Notes: 0 _ / _ _ = feet / inches-- i.e. the first digit is feet, the second and third digits are inches. So 509 is 5' 9''<br>
               - 9061 - 9998	Height (meters/centimeters)<br>
               Notes: The initial ´9 ´ indicates this was a metric value. Height in m/cm (9_|_ _)<br>
               - 7777:	Don’t know/Not sure<br>	
               - 9999: Refused<br>
--    All the values ranging in between 200 - 711, were first converted the strings, the first letter of the string was taken as feet and converted to float and the last two letters were stored into a variable inches and converted to float. The feet value was multiplied with 12 and added to the inches variable. Another column named as `HEIGHT` was created and the claculated values were stored in that column
--    Values ranging from 9061 to 9998, were also converted to strings, the second letter was taken as meter and last two letters as 'cm', these values were converted to float and 'cm' variable was multiplied by 0.01 and added to m, This gave us height in meters and to convert it into strings the meter value was multiplied by 39.37. this value was also stored in `HEIGHT` column
--       Values 9999 and 7777 were changed to NaN values
+    - All the values ranging in between 200 - 711, were first converted the strings, the first letter of the string was taken as feet and converted to float and the last two letters were stored into a variable inches and converted to float. The feet value was multiplied with 12 and added to the inches variable. Another column named as `HEIGHT` was created and the claculated values were stored in that column
+    - Values ranging from 9061 to 9998, were also converted to strings, the second letter was taken as meter and last two letters as 'cm', these values were converted to float and 'cm' variable was multiplied by 0.01 and added to m, This gave us height in meters and to convert it into strings the meter value was multiplied by 39.37. this value was also stored in `HEIGHT` column
+    - Values 9999 and 7777 were changed to NaN values
 
 - **Substituting the values of 'Don’t know/Not sure' or 'Refused' as NaN values**
     - For some columns the value of 'Don’t know/Not sure' or 'Refused' value is 7 or 9, these values were replaced to NaN values. Column names are
-    - "DIABETE4", "PREDIAB2", "DIABTYPE", "_TOTINDA", "PERSDOC3", "CHECKUP1", "PDIABTS1", "INSULIN1", "EYEEXAM1", "DIABEYE1", "DIABEDU1", "FEETSORE", "CVDINFR4", "CVDCRHD4", "CVDSTRK3", "HAVARTH4","DIFFWALK" with 'Don’t know/Not sure' or 'Refused' value as 7 or 9
+        - "DIABETE4", "PREDIAB2", "DIABTYPE", "_TOTINDA", "PERSDOC3", "CHECKUP1", "PDIABTS1", "INSULIN1", "EYEEXAM1", "DIABEYE1", "DIABEDU1", "FEETSORE", "CVDINFR4", "CVDCRHD4", "CVDSTRK3", "HAVARTH4","DIFFWALK" with 'Don’t know/Not sure' or 'Refused' value as 7 or 9
     - For other columns the value of 'Don’t know/Not sure' or 'Refused' value as 77 or 99, these were also replaced with NaN values. Column names are:
       - "CHKHEMO3", "PHYSHLTH", "MENTHLTH", "SLEPTIM1", "PRIMINSR"
     - For column "_AGEG5YR", value 14 represents 'Don’t know/Not sure' value, it was converted to NaN value
