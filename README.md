@@ -89,12 +89,23 @@ This dataset was uploaded to an postgres database hosted by AWS RDS to be easily
 Feature selection is a crucial step in the process of building machine learning models as it plays a pivotal role in enhancing model performance and interpretability. The significance of feature selection lies in its ability to improve the model's efficiency by focusing on the most relevant and informative features while discarding irrelevant or redundant ones. By reducing the dimensionality of the dataset, feature selection helps mitigate the curse of dimensionality, which can adversely affect model training time and generalization to unseen data. For this project, we view the correlation matrix to check the correlation between features.
 
 
+## The Models
 
-## Model Description
+### Model Description
 
 Various models were used to predict diabetes using a subset of the master data, including K-Nearest Neighbour, Random Forest, and Deep Learning model. These models were imported from the ```sklearn``` library. The data was split into a training and testing set, using the Diabetes column as the target variable, and the features as selected during the feature selection process described in the previous section.
 
-## Model Evaluation
+### Dealing with Class Imbalance
+
+The raw data taken from the CDC's website contained four categories as described in data sections above. When cleaned and grouped, no diabetes had almost 5 times more observations than the diabetes, gestantional diabetes, and pre-diabetes/borderline diabetes combined. This imbalance in the dataset can lead to models that are biased towards the majority class and have poor generalization, resulting in poor precision and recall for the minority class. This is another reason why the accuracy of a model should not be the only metric that is evaluated when determining the performance of a model. Imbalanced classes can provide misleading evaluation metrics as they can produce a high accuracy, but this is a result of the accuracy of the majority class prediction and not representative of the minority class prediction accuracy.
+
+As a result, we deal with the class imbalance by using resampling techniques including both oversampling of the minority class, and undersampling of the majority class. In addition, we use ensemble methods such as Random Forests in this exploration that can handle imbalanced datasets more effectivetly than individual models.For this project, we used the following methods of dealing with class imbalance:
+1. RandomOversampler: This randomly duplicates instances from the minority class (or classes) until a more balanced distribution is achieved. From imbalanced-learn library.
+2. Random Undersampling: This does the oppositre of the above. Instead of oversampling the minority class, we undersample the majority class.
+3. Synthetic Minority Oversampling Technique (SMOTE): SMOTE is specifically designed to tackle imbalanced datasets by generating synthetic samples for the minority class. This algorithm can be found in the imblearn library.
+4. Adaptive Synthetic Sampling Approach (ADASYN): ADASYN is a generalized form of the SMOTE algorithm. This algorithm also aims to oversample the minority class by generating synthetic instances for it. But the difference here is it considers the density distribution which decides the number of synthetic instances generated for samples which difficult to learn. This algorithm can be found in the imblearn library.
+
+### Model Evaluation
 
 Several metrics were used to evaluate each model, including:
 1. Confusion matrix: A confusion matrix is a table that is used to evaluate the performance of a classification algorithm on a set of test data for which the true values are known. It provides a summary of prediction results and reveals insights into the model's behavior.
@@ -119,6 +130,7 @@ Actual Positive        FN                   TP
   * The diagonal line (from the bottom-left to the top-right) represents the performance of a random classifier.
 
 ## Analysis and Results
+
 
 ## Conclusion
 
