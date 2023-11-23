@@ -115,6 +115,19 @@ Columns `SEXVAR`, `_BMI5CAT`, `_RACE1`, `_EDUCAG`, `_SMOKER3` contains numerical
         - For some ("PERSDOC3", "DIABETE4", "PREDIAB2") the value was 3
         - For some ("CHECKUP1", "PDIABTS1", "EYEEXAM1","DIABEYE1", "DIABEDU1") the value was 8
         - For others ("CHKHEMO3", "PHYSHLTH", "MENTHLTH", "SLEPTIM1", "PRIMINSR") the value was 88
+
+**4: Saving the modified datframe as .csv, keeping the index column.** This index column is renamed as `ID` column. This entire data has to be divided into two dataframes:
+    - Dataframe 1: Containing the general information <br>
+Will be used to categorize if the person has diabetes or not. Columns specific to Diabetes are dropped new dataframe "gen_info_df"
+    - Dataframe 2: Specific to Diabetic patients <br>
+Will be used to categorize the type of diabetes (type 1 or type 2)
+
+**These two dataframes can later be joined on the "ID Column"** -- This was done for the stacked machine learning model
+ '
+**5: Splitting the data into two dataframes:** 
+
+
+
   
 
     
