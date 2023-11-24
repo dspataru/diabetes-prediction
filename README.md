@@ -151,6 +151,281 @@ Several classifier models were run with different resampling techniques and belo
 ### Analysis with Dataset 3
 
 
+### Analysis with Dataset 4:
+In this section we have tried to build a model that can successfully categories the diabetes types. Type 1 and type 2. In order to do that we have taken into consideration into several machine learning models such as logistic regression, random forest, random decision classifier, K-nn neighbors, XGBoost, SVM. We also tried to find out the Neural Network model in order to interpret the categories. We will learn with the given dataset which model successfully predict diabetes types.
+
+To set up the environment we have first install the psycopg2 module. We had to create a connection to the database. In order to do that, we had to run the below code. Basically we needed to connect to the table called claean_diab_info which is the table used to train and predict the categories of the diabetes.
+
+import psycopg2
+from sqlalchemy import create_engine
+import pandas as pd
+
+hostname = 'diabetes-dataset.cwpas6tssjkb.us-east-1.rds.amazonaws.com'
+database = 'diabetes_database'
+username = '' # enter your username manually
+password = '' # enter your password manually
+port_id = 5432
+
+try:
+    conn = psycopg2.connect(
+        host = 'diabetes-dataset.cwpas6tssjkb.us-east-1.rds.amazonaws.com',
+        dbname = database,
+        user = 'mislam',
+        password = 'MPIA-dd#',
+        port = 5432)
+    print("Connected to the database!")
+
+except Exception as e:
+    print(f"Unable to connect to the database. Error: {e}")
+
+# example query to grab all of the columns
+sql_query = "SELECT * FROM clean_diab_info"
+df = pd.read_sql_query(sql_query, conn)
+df.head()
+
+
+ 
+
+We had created a new dataframe diabetes_df which consisted of the below columns:
+
+"DIABETES","DIABTYPE","AGE","INSULIN_Y/N","A-one-C_test","EYEEXAM1","DIABEYE1","DIAB_MNGMT","PERSONAL_DOC","HRT_DISEASE","STROKE","ARTHRITIS"
+
+
+
+In order to train and test the data we had to split the data into two different parts> one training dataset and the test dataset
+
+X=diabetes_category[["DIABETES","AGE","INSULIN_Y/N","A-one-C_test","EYEEXAM1","DIABEYE1","DIAB_MNGMT","PERSONAL_DOC","HRT_DISEASE","STROKE","ARTHRITIS"]]
+
+y=diabetes_category["DIABTYPE"]
+
+
+The first model that we tried is the logistic regression. The results are following:
+
+
+Accuracy: 0.9072681704260651
+Classification Report:
+              precision    recall  f1-score   support
+
+         1.0       0.80      0.04      0.08       191
+         2.0       0.91      1.00      0.95      1804
+
+    accuracy                           0.91      1995
+   macro avg       0.85      0.52      0.52      1995
+weighted avg       0.90      0.91      0.87      1995
+
+
+
+ 
+
+
+We can see that the model is not able to predict the type 1 diabetes and having a f1-score of .08. The next model that we tried 
+
+
+Accuracy: 0.8426065162907268
+Classification Report:
+              precision    recall  f1-score   support
+
+         1.0       0.20      0.22      0.21       191
+         2.0       0.92      0.91      0.91      1804
+
+    accuracy                           0.84      1995
+   macro avg       0.56      0.56      0.56      1995
+weighted avg       0.85      0.84      0.85      1995
+
+
+
+
+
+
+ 
+
+
+This is one of the best models to predict both correctly but it has overall accuracy low as 84%.
+
+
+Then we tried the random forest classifier model and the below is the accuracy is below:
+
+ 
+
+Accuracy: 0.8982456140350877
+Classification Report:
+              precision    recall  f1-score   support
+
+         1.0       0.41      0.14      0.20       191
+         2.0       0.91      0.98      0.95      1804
+
+    accuracy                           0.90      1995
+   macro avg       0.66      0.56      0.57      1995
+weighted avg       0.87      0.90      0.87      1995
+
+
+
+We see that it is one of the best models to predict having the highest f1-scorre 20% and overall accuracy as 90%
+
+
+We also drew the importance matrix from here:
+
+ 
+By taking only the important columns we increased the f1-score a little bit of 22% but the overall remains the same.
+
+ 
+
+
+Then we took into account the SV technique. And the following is the result:
+
+Accuracy: 0.9042606516290727
+Classification Report:
+              precision    recall  f1-score   support
+
+         1.0       0.00      0.00      0.00       191
+         2.0       0.90      1.00      0.95      1804
+
+    accuracy                           0.90      1995
+   macro avg       0.45      0.50      0.47      1995
+weighted avg       0.82      0.90      0.86      1995
+
+
+
+However, it fails to draw the type 1 
+
+
+
+Then the next model that we tried is the Knn classifier.
+
+ 
+
+
+Accuracy: 0.8962406015037594
+Classification Report:
+              precision    recall  f1-score   support
+
+         1.0       0.37      0.12      0.18       191
+         2.0       0.91      0.98      0.94      1804
+
+    accuracy                           0.90      1995
+   macro avg       0.64      0.55      0.56      1995
+weighted avg       0.86      0.90      0.87      1995
+
+
+
+This is also a good model to predict
+
+
+The next model we tried is the XGB classifier.
+
+ 
+
+
+Accuracy: 0.9027568922305764
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.47      0.13      0.20       191
+           1       0.91      0.98      0.95      1804
+
+    accuracy                           0.90      1995
+   macro avg       0.69      0.56      0.58      1995
+weighted avg       0.87      0.90      0.88      1995
+
+
+It is the second best model so far with the f1 score 20 and accuracy 90%.
+
+
+We also tried to tune up the NN however the accuracy is bit lower than the usual models. See below:
+
+
+ 
+
+
+Trial 60 Complete [00h 00m 16s]
+val_accuracy: 0.08540496975183487
+
+Best val_accuracy So Far: 0.08540496975183487
+Total elapsed time: 00h 06m 38s
+
+
+Then we have tried to scaled the dataset and tired to do the same models. 
+Logistic regression=
+
+Accuracy: 0.9157979149959904
+Classification Report:
+              precision    recall  f1-score   support
+
+         1.0       1.00      0.01      0.03       213
+         2.0       0.92      1.00      0.96      2281
+
+    accuracy                           0.92      2494
+   macro avg       0.96      0.51      0.49      2494
+weighted avg       0.92      0.92      0.88      2494
+
+
+
+
+
+Decision tree=
+
+Accuracy: 0.4843624699278268
+Classification Report:
+              precision    recall  f1-score   support
+
+         1.0       0.10      0.61      0.17       213
+         2.0       0.93      0.47      0.63      2281
+
+    accuracy                           0.48      2494
+   macro avg       0.51      0.54      0.40      2494
+weighted avg       0.86      0.48      0.59      2494
+
+
+
+
+random_forest:
+
+Accuracy: 0.8376102646351243
+Classification Report:
+              precision    recall  f1-score   support
+
+         1.0       0.10      0.11      0.11       213
+         2.0       0.92      0.91      0.91      2281
+
+    accuracy                           0.84      2494
+   macro avg       0.51      0.51      0.51      2494
+weighted avg       0.85      0.84      0.84      2494
+
+
+
+Xgb_classifier=
+
+Accuracy: 0.899749373433584
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.42      0.12      0.19       191
+           1       0.91      0.98      0.95      1804
+
+    accuracy                           0.90      1995
+   macro avg       0.67      0.55      0.57      1995
+weighted avg       0.87      0.90      0.87      1995
+
+
+knn_classifier_1:
+
+Accuracy: 0.8927318295739348
+Classification Report:
+              precision    recall  f1-score   support
+
+         1.0       0.33      0.12      0.17       191
+         2.0       0.91      0.98      0.94      1804
+
+    accuracy                           0.89      1995
+   macro avg       0.62      0.55      0.56      1995
+weighted avg       0.86      0.89      0.87      1995
+
+
+
+
+As type 1 diabetes is genetical and it does not depend upon anything As a result, it is quite hard to predict type 1 diabetes
+
+
 ## Conclusion
 
 Below is a summary of the results of the best model performance given the different datasets.
