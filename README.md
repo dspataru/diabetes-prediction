@@ -7,10 +7,8 @@
 
 As per the picture provided, it is evident that the likelihood of having diabetes or not having diabetes is directly related to the age of the person. Approximately 25% of the dataset is covered by age, followed by income and general health. This insight emphasizes the significance of age in understanding and predicting diabetes in the given dataset.
 ￼
+![Pie Chart](https://github.com/dspataru/diabetes-prediction/assets/136105558/cf992faa-72c6-4ab5-b9a0-61fcb676994d)
 
- ![Features Importances](https://github.com/dspataru/diabetes-prediction/assets/136105558/2cacf8d8-3b2a-4e54-a204-6956e858614c)
-
- 
 ![Features Importances](https://github.com/dspataru/diabetes-prediction/assets/136105558/581baa07-e32f-4370-aad8-d332d7686632)
 
 # Model Description:
@@ -53,15 +51,21 @@ Classification Reports and ROC Charts are:-
 
    1.1 Classification Report:
 
+![Screenshot 2023-11-23 at 10 09 08 PM (2)](https://github.com/dspataru/diabetes-prediction/assets/136105558/2638a3b7-3518-4baa-bf54-c3eea4ebbecf)
+
 
    1.2 ROC Chart:
 
+![ROC Equal](https://github.com/dspataru/diabetes-prediction/assets/136105558/637c2728-9044-430e-8676-6381e829d70b)
 
  2. Over Sampling and Under Sampling:
 
    2.1 Classification Report:
 
- 
+ ![Screenshot 2023-11-23 at 10 07 22 PM (2)](https://github.com/dspataru/diabetes-prediction/assets/136105558/fb86f19b-3e72-4118-aa73-2cf63e7ecd7f)
+
     
    2.2 ROC Chart:
+
+![over and under ROC](https://github.com/dspataru/diabetes-prediction/assets/136105558/59c673cd-8d33-42f5-a7b0-47aa7e63e050)
 
