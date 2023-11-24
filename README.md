@@ -195,12 +195,23 @@ This dataset was uploaded to an postgres database hosted by AWS RDS to be easily
 Feature selection is a crucial step in the process of building machine learning models as it plays a pivotal role in enhancing model performance and interpretability. The significance of feature selection lies in its ability to improve the model's efficiency by focusing on the most relevant and informative features while discarding irrelevant or redundant ones. By reducing the dimensionality of the dataset, feature selection helps mitigate the curse of dimensionality, which can adversely affect model training time and generalization to unseen data. For this project, we view the correlation matrix to check the correlation between features.
 
 
+## The Models
 
-## Model Description
+### Model Description
 
 Various models were used to predict diabetes using a subset of the master data, including K-Nearest Neighbour, Random Forest, and Deep Learning model. These models were imported from the ```sklearn``` library. The data was split into a training and testing set, using the Diabetes column as the target variable, and the features as selected during the feature selection process described in the previous section.
 
-## Model Evaluation
+### Dealing with Class Imbalance
+
+The raw data taken from the CDC's website contained four categories as described in data sections above. When cleaned and grouped, no diabetes had almost 5 times more observations than the diabetes, gestantional diabetes, and pre-diabetes/borderline diabetes combined. This imbalance in the dataset can lead to models that are biased towards the majority class and have poor generalization, resulting in poor precision and recall for the minority class. This is another reason why the accuracy of a model should not be the only metric that is evaluated when determining the performance of a model. Imbalanced classes can provide misleading evaluation metrics as they can produce a high accuracy, but this is a result of the accuracy of the majority class prediction and not representative of the minority class prediction accuracy.
+
+As a result, we deal with the class imbalance by using resampling techniques including both oversampling of the minority class, and undersampling of the majority class. In addition, we use ensemble methods such as Random Forests in this exploration that can handle imbalanced datasets more effectivetly than individual models.For this project, we used the following methods of dealing with class imbalance:
+1. RandomOversampler: This randomly duplicates instances from the minority class (or classes) until a more balanced distribution is achieved. From imbalanced-learn library.
+2. Random Undersampling: This does the oppositre of the above. Instead of oversampling the minority class, we undersample the majority class.
+3. Synthetic Minority Oversampling Technique (SMOTE): SMOTE is specifically designed to tackle imbalanced datasets by generating synthetic samples for the minority class. This algorithm can be found in the imblearn library.
+4. Adaptive Synthetic Sampling Approach (ADASYN): ADASYN is a generalized form of the SMOTE algorithm. This algorithm also aims to oversample the minority class by generating synthetic instances for it. But the difference here is it considers the density distribution which decides the number of synthetic instances generated for samples which difficult to learn. This algorithm can be found in the imblearn library.
+
+### Model Evaluation
 
 Several metrics were used to evaluate each model, including:
 1. Confusion matrix: A confusion matrix is a table that is used to evaluate the performance of a classification algorithm on a set of test data for which the true values are known. It provides a summary of prediction results and reveals insights into the model's behavior.
@@ -226,11 +237,311 @@ Actual Positive        FN                   TP
 
 ## Analysis and Results
 
+### Analysis with Dataset 1
+
+The first dataset that was used contained the following columns: 'GENDER', 'INCOME', 'WEIGHT', 'BMI', 'RACE', 'AGE', 'DIABETES', 'PHYSHLTH', 'MENTHLTH', 'EXERCISE', 'HLT_INSURANCE', 'PERSONAL_DOC', 'CHECKUP1', 'HRT_ATTACK', 'HRT_DISEASE', 'STROKE', 'ARTHRITIS', '_SMOKER3', 'DIFFWALK', 'EDUCATION', 'HEIGHT'.
+
+Several classifier models were run with different resampling techniques and below is a summary of the evaluation metrics for each model:
+
+![dataset1-models-comparison](https://github.com/dspataru/diabetes-prediction/assets/61765352/e0d95308-d221-4b4e-b00e-c10a6a741301)
+
+
+![F1-Score](https://github.com/dspataru/diabetes-prediction/assets/61765352/860e1b6d-5734-4138-9867-151cc4e551cb)
+
+![Recall](https://github.com/dspataru/diabetes-prediction/assets/61765352/c8cb062d-eae5-4112-9ad2-a3b78c5dcb21)
+
+![Accuracy](https://github.com/dspataru/diabetes-prediction/assets/61765352/0d505005-cca1-4e1f-bdae-aeac6f2ea343)
+
+### Analysis with Dataset 2
+
+### Analysis with Dataset 3
+
+
+### Analysis with Dataset 4:
+In this section we have tried to build a model that can successfully categories the diabetes types. Type 1 and type 2. In order to do that we have taken into consideration into several machine learning models such as logistic regression, random forest, random decision classifier, K-nn neighbors, XGBoost, SVM. We also tried to find out the Neural Network model in order to interpret the categories. We will learn with the given dataset which model successfully predict diabetes types.
+
+To set up the environment we have first install the psycopg2 module. We had to create a connection to the database. In order to do that, we had to run the below code. Basically we needed to connect to the table called claean_diab_info which is the table used to train and predict the categories of the diabetes.
+
+import psycopg2
+from sqlalchemy import create_engine
+import pandas as pd
+
+hostname = 'diabetes-dataset.cwpas6tssjkb.us-east-1.rds.amazonaws.com'
+database = 'diabetes_database'
+username = '' # enter your username manually
+password = '' # enter your password manually
+port_id = 5432
+
+try:
+    conn = psycopg2.connect(
+        host = 'diabetes-dataset.cwpas6tssjkb.us-east-1.rds.amazonaws.com',
+        dbname = database,
+        user = 'mislam',
+        password = 'MPIA-dd#',
+        port = 5432)
+    print("Connected to the database!")
+
+except Exception as e:
+    print(f"Unable to connect to the database. Error: {e}")
+
+# example query to grab all of the columns
+sql_query = "SELECT * FROM clean_diab_info"
+df = pd.read_sql_query(sql_query, conn)
+df.head()
+
+
+ 
+
+We had created a new dataframe diabetes_df which consisted of the below columns:
+
+"DIABETES","DIABTYPE","AGE","INSULIN_Y/N","A-one-C_test","EYEEXAM1","DIABEYE1","DIAB_MNGMT","PERSONAL_DOC","HRT_DISEASE","STROKE","ARTHRITIS"
+
+
+
+In order to train and test the data we had to split the data into two different parts> one training dataset and the test dataset
+
+X=diabetes_category[["DIABETES","AGE","INSULIN_Y/N","A-one-C_test","EYEEXAM1","DIABEYE1","DIAB_MNGMT","PERSONAL_DOC","HRT_DISEASE","STROKE","ARTHRITIS"]]
+
+y=diabetes_category["DIABTYPE"]
+
+
+The first model that we tried is the logistic regression. The results are following:
+
+
+Accuracy: 0.9072681704260651
+Classification Report:
+              precision    recall  f1-score   support
+
+         1.0       0.80      0.04      0.08       191
+         2.0       0.91      1.00      0.95      1804
+
+    accuracy                           0.91      1995
+   macro avg       0.85      0.52      0.52      1995
+weighted avg       0.90      0.91      0.87      1995
+
+
+
+ 
+
+
+We can see that the model is not able to predict the type 1 diabetes and having a f1-score of .08. The next model that we tried 
+
+
+Accuracy: 0.8426065162907268
+Classification Report:
+              precision    recall  f1-score   support
+
+         1.0       0.20      0.22      0.21       191
+         2.0       0.92      0.91      0.91      1804
+
+    accuracy                           0.84      1995
+   macro avg       0.56      0.56      0.56      1995
+weighted avg       0.85      0.84      0.85      1995
+
+
+
+
+
+
+ 
+
+
+This is one of the best models to predict both correctly but it has overall accuracy low as 84%.
+
+
+Then we tried the random forest classifier model and the below is the accuracy is below:
+
+ 
+
+Accuracy: 0.8982456140350877
+Classification Report:
+              precision    recall  f1-score   support
+
+         1.0       0.41      0.14      0.20       191
+         2.0       0.91      0.98      0.95      1804
+
+    accuracy                           0.90      1995
+   macro avg       0.66      0.56      0.57      1995
+weighted avg       0.87      0.90      0.87      1995
+
+
+
+We see that it is one of the best models to predict having the highest f1-scorre 20% and overall accuracy as 90%
+
+
+We also drew the importance matrix from here:
+
+ 
+By taking only the important columns we increased the f1-score a little bit of 22% but the overall remains the same.
+
+ 
+
+
+Then we took into account the SV technique. And the following is the result:
+
+Accuracy: 0.9042606516290727
+Classification Report:
+              precision    recall  f1-score   support
+
+         1.0       0.00      0.00      0.00       191
+         2.0       0.90      1.00      0.95      1804
+
+    accuracy                           0.90      1995
+   macro avg       0.45      0.50      0.47      1995
+weighted avg       0.82      0.90      0.86      1995
+
+
+
+However, it fails to draw the type 1 
+
+
+
+Then the next model that we tried is the Knn classifier.
+
+ 
+
+
+Accuracy: 0.8962406015037594
+Classification Report:
+              precision    recall  f1-score   support
+
+         1.0       0.37      0.12      0.18       191
+         2.0       0.91      0.98      0.94      1804
+
+    accuracy                           0.90      1995
+   macro avg       0.64      0.55      0.56      1995
+weighted avg       0.86      0.90      0.87      1995
+
+
+
+This is also a good model to predict
+
+
+The next model we tried is the XGB classifier.
+
+ 
+
+
+Accuracy: 0.9027568922305764
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.47      0.13      0.20       191
+           1       0.91      0.98      0.95      1804
+
+    accuracy                           0.90      1995
+   macro avg       0.69      0.56      0.58      1995
+weighted avg       0.87      0.90      0.88      1995
+
+
+It is the second best model so far with the f1 score 20 and accuracy 90%.
+
+
+We also tried to tune up the NN however the accuracy is bit lower than the usual models. See below:
+
+
+ 
+
+
+Trial 60 Complete [00h 00m 16s]
+val_accuracy: 0.08540496975183487
+
+Best val_accuracy So Far: 0.08540496975183487
+Total elapsed time: 00h 06m 38s
+
+
+Then we have tried to scaled the dataset and tired to do the same models. 
+Logistic regression=
+
+Accuracy: 0.9157979149959904
+Classification Report:
+              precision    recall  f1-score   support
+
+         1.0       1.00      0.01      0.03       213
+         2.0       0.92      1.00      0.96      2281
+
+    accuracy                           0.92      2494
+   macro avg       0.96      0.51      0.49      2494
+weighted avg       0.92      0.92      0.88      2494
+
+
+
+
+
+Decision tree=
+
+Accuracy: 0.4843624699278268
+Classification Report:
+              precision    recall  f1-score   support
+
+         1.0       0.10      0.61      0.17       213
+         2.0       0.93      0.47      0.63      2281
+
+    accuracy                           0.48      2494
+   macro avg       0.51      0.54      0.40      2494
+weighted avg       0.86      0.48      0.59      2494
+
+
+
+
+random_forest:
+
+Accuracy: 0.8376102646351243
+Classification Report:
+              precision    recall  f1-score   support
+
+         1.0       0.10      0.11      0.11       213
+         2.0       0.92      0.91      0.91      2281
+
+    accuracy                           0.84      2494
+   macro avg       0.51      0.51      0.51      2494
+weighted avg       0.85      0.84      0.84      2494
+
+
+
+Xgb_classifier=
+
+Accuracy: 0.899749373433584
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.42      0.12      0.19       191
+           1       0.91      0.98      0.95      1804
+
+    accuracy                           0.90      1995
+   macro avg       0.67      0.55      0.57      1995
+weighted avg       0.87      0.90      0.87      1995
+
+
+knn_classifier_1:
+
+Accuracy: 0.8927318295739348
+Classification Report:
+              precision    recall  f1-score   support
+
+         1.0       0.33      0.12      0.17       191
+         2.0       0.91      0.98      0.94      1804
+
+    accuracy                           0.89      1995
+   macro avg       0.62      0.55      0.56      1995
+weighted avg       0.86      0.89      0.87      1995
+
+
+
+
+As type 1 diabetes is genetical and it does not depend upon anything As a result, it is quite hard to predict type 1 diabetes
+
+
 ## Conclusion
 
-Things we learned:
-1. 
+Below is a summary of the results of the best model performance given the different datasets.
+![summary-of-results](https://github.com/dspataru/diabetes-prediction/assets/61765352/81573db1-9ee8-4b87-aad3-b6573da64745)
 
-## Future Work
+The best dataset to use for predicting diabetes given the survey data from the CDC was the full dataset: Gen_info_final.
 
-## References
+Some important observations:
+* Preparing the data is very important for achieving good results
+* More features lead to better model performance
+* Having a balanced dataset is important to have higher recall and precision for the minority class
+* Some features that may not look significant may play a big role in classification
+* Future improvements: adding more data for the diabetic patients including sugar level, cholesterol, etc
