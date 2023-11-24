@@ -431,7 +431,7 @@ As type 1 diabetes is genetical and it does not depend upon anything As a result
 Below is a summary of the results of the best model performance given the different datasets.
 ![summary-of-results](https://github.com/dspataru/diabetes-prediction/assets/61765352/81573db1-9ee8-4b87-aad3-b6573da64745)
 
-The best dataset to use for predicting diabetes given the survey data from the CDC was the full dataset containing 34 features including 
+The best dataset to use for predicting diabetes given the survey data from the CDC was the full dataset: Gen_info_final.
 
 Some important observations:
 * Preparing the data is very important for achieving good results
