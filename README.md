@@ -137,7 +137,7 @@ Columns `SEXVAR`, `_BMI5CAT`, `_RACE1`, `_EDUCAG`, `_SMOKER3` contains numerical
 - Columns were re-named for a clear understanding of the data
 - Null values were counted for each column -- a few columns have question specific to the patients who have diabetes therefore they all have same number of missing values (questions that were not asked from the non-diabetic people).
 
-![Alt text](image.png)
+![image](https://github.com/dspataru/diabetes-prediction/assets/136101293/5062c79f-0391-401b-a5e1-554bb188ff89)
 
 - Therefore, a two separate dataframes are created:
 
