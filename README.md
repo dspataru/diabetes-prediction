@@ -155,10 +155,8 @@ Several classifier models were run with different resampling techniques and belo
 
 As per the picture provided, it is evident that the likelihood of having diabetes or not having diabetes is directly related to the age of the person. Approximately 25% of the dataset is covered by age, followed by income and general health. This insight emphasizes the significance of age in understanding and predicting diabetes in the given dataset.
 ￼
+![Pie Chart](https://github.com/dspataru/diabetes-prediction/assets/136105558/6a2b555a-0d26-452a-b632-8133d3960bde)
 
- ![Features Importances](https://github.com/dspataru/diabetes-prediction/assets/136105558/2cacf8d8-3b2a-4e54-a204-6956e858614c)
-
- 
 ![Features Importances](https://github.com/dspataru/diabetes-prediction/assets/136105558/581baa07-e32f-4370-aad8-d332d7686632)
 
 # Model Description of Data set 2
