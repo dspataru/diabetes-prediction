@@ -131,12 +131,36 @@ Actual Positive        FN                   TP
 
 ## Analysis and Results
 
+### Analysis with Dataset 1
+
+The first dataset that was used contained the following columns: 'GENDER', 'INCOME', 'WEIGHT', 'BMI', 'RACE', 'AGE', 'DIABETES', 'PHYSHLTH', 'MENTHLTH', 'EXERCISE', 'HLT_INSURANCE', 'PERSONAL_DOC', 'CHECKUP1', 'HRT_ATTACK', 'HRT_DISEASE', 'STROKE', 'ARTHRITIS', '_SMOKER3', 'DIFFWALK', 'EDUCATION', 'HEIGHT'.
+
+Several classifier models were run with different resampling techniques and below is a summary of the evaluation metrics for each model:
+
+![dataset1-models-comparison](https://github.com/dspataru/diabetes-prediction/assets/61765352/e0d95308-d221-4b4e-b00e-c10a6a741301)
+
+
+![F1-Score](https://github.com/dspataru/diabetes-prediction/assets/61765352/860e1b6d-5734-4138-9867-151cc4e551cb)
+
+![Recall](https://github.com/dspataru/diabetes-prediction/assets/61765352/c8cb062d-eae5-4112-9ad2-a3b78c5dcb21)
+
+![Accuracy](https://github.com/dspataru/diabetes-prediction/assets/61765352/0d505005-cca1-4e1f-bdae-aeac6f2ea343)
+
+### Analysis with Dataset 2
+
+### Analysis with Dataset 3
+
 
 ## Conclusion
 
-Things we learned:
-1. 
+Below is a summary of the results of the best model performance given the different datasets.
+![summary-of-results](https://github.com/dspataru/diabetes-prediction/assets/61765352/81573db1-9ee8-4b87-aad3-b6573da64745)
 
-## Future Work
+The best dataset to use for predicting diabetes given the survey data from the CDC was the full dataset containing 34 features including 
 
-## References
+Some important observations:
+* Preparing the data is very important for achieving good results
+* More features lead to better model performance
+* Having a balanced dataset is important to have higher recall and precision for the minority class
+* Some features that may not look significant may play a big role in classification
+* Future improvements: adding more data for the diabetic patients including sugar level, cholesterol, etc
