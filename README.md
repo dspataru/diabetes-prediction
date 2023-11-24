@@ -52,7 +52,7 @@ These tables were used to extract information directly related to diabetes. The 
 
 These were questions that the BRFSS asked over the phone related specifically to diabetes and pre-diabetes. In addition to the above questions, diabetes research has found the there are other important risk factors to be taken into consideration, including blood pressure, cholesterol, smoking, obesity, age, sex, race, diet, exercise, alcohol consumption, SMI, household income, sleep, frequency of doctor visits, medical care coverage, and mental and physical health. Unfortunately, the 2022 questionnaire does not include questions relation to blood pressure, cholesterol, or diet, however, there are many other questions that were used to provide data for the predictive models.
 
-Following columns were selected for the analysis. The values in the columns were analyzed and data cleaning was performed.
+Following columns were selected for the analysis. The values in the columns were analyzed and data cleaning was performed
 <br>
 
 | Category         | Renamed-as    | Label/Question                                                                                                                                                                           | Value                                                                                                                               | Null/Refused                               |
