@@ -224,7 +224,20 @@ Several classifier models were run with different resampling techniques and belo
 ### Analysis with Dataset 2
 
 ### Analysis with Dataset 3
+One-hot encoding was performed on pre-processed data to convert the categorical columns to boolean features. The dataset was split into test and training set and scaled using `StandardScaler` before applying the machine learning model. Random-forest was applied to the dataset taking column `DIABETES` as  Target Variable (y) and all other features variable as (X).
 
+![image](https://github.com/dspataru/diabetes-prediction/assets/136101293/c46e4d14-f797-4713-be90-41d458634d5d)
+
+The accuracy predicted for the model is 0.83, which is a good accuracy. The model did great for the population with no diabetes(0){precision = 0.85, recall = 0.91}, however, the precision and recall score to Diabeteic population (1) was 0.15 and 0.13 respectively.
+
+**Reason:** The data is imbalanced as 82.99% of the target values (204,208 out of 246,050) are non-diabetic (0). Therefore the model trained well for the non-diabetic population whereas the data for diabetic population was insufficient to train the model accurately
+
+![image](https://github.com/dspataru/diabetes-prediction/assets/136101293/ae74cb7c-99be-4164-a1aa-8b79ba2ee82c)
+
+**RandomOverSampler** from imbalanced-learn library was utilized to resample the data. This module equally dritributed the data among diabetic and non-diabetic population and the machine learning model was trained again on Over-sampled data.
+This model did a great job in predicting both the diabetic and non-diabetic population as can be inferred from the high balanced accuracy score of 95%. This model has a precision score of 98% for the non-diabetic population and 91% for the diabetic population. This model has a recall score of 91% for thenon-diabetic population and 99% for the diabetic population.
+
+![image](https://github.com/dspataru/diabetes-prediction/assets/136101293/9e51343f-4219-47db-aab8-30ac3f357101)
 
 ### Analysis with Dataset 4:
 In this section we have tried to build a model that can successfully categories the diabetes types. Type 1 and type 2. In order to do that we have taken into consideration into several machine learning models such as logistic regression, random forest, random decision classifier, K-nn neighbors, XGBoost, SVM. We also tried to find out the Neural Network model in order to interpret the categories. We will learn with the given dataset which model successfully predict diabetes types.
